@@ -1,32 +1,50 @@
-import React from "react";
+
+import React, { useState } from "react";
 import { Stack } from "expo-router";
-import { FlatList, StyleSheet, View } from "react-native";
-import { useTheme } from "@react-navigation/native";
-import { modalDemos } from "@/components/homeData";
-import { DemoCard } from "@/components/DemoCard";
+import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
+import { WebView } from "react-native-webview";
+import { colors } from "@/styles/commonStyles";
 import { HeaderRightButton, HeaderLeftButton } from "@/components/HeaderButtons";
 
 export default function HomeScreen() {
-  const theme = useTheme();
+  const [loading, setLoading] = useState(true);
 
   return (
     <>
       <Stack.Screen
         options={{
-          title: "Building the app...",
+          title: "Appointment Manager",
           headerRight: () => <HeaderRightButton />,
           headerLeft: () => <HeaderLeftButton />,
         }}
       />
-      <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-        <FlatList
-          data={modalDemos}
-          renderItem={({ item }) => <DemoCard item={item} />}
-          keyExtractor={(item) => item.route}
-          contentContainerStyle={styles.listContainer}
-          contentInsetAdjustmentBehavior="automatic"
-          showsVerticalScrollIndicator={false}
+      <View style={styles.container}>
+        <WebView
+          source={{ uri: "https://saas-appointment-manager-beauty-businesses-i25icg96.sites.blink.new" }}
+          style={styles.webview}
+          onLoadStart={() => {
+            console.log("WebView loading started");
+            setLoading(true);
+          }}
+          onLoadEnd={() => {
+            console.log("WebView loading ended");
+            setLoading(false);
+          }}
+          onError={(syntheticEvent) => {
+            const { nativeEvent } = syntheticEvent;
+            console.log("WebView error:", nativeEvent);
+          }}
+          startInLoadingState={true}
+          javaScriptEnabled={true}
+          domStorageEnabled={true}
+          scalesPageToFit={true}
         />
+        {loading && (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color={colors.primary} />
+            <Text style={styles.loadingText}>Loading...</Text>
+          </View>
+        )}
       </View>
     </>
   );
@@ -35,9 +53,26 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.background,
   },
-  listContainer: {
-    paddingVertical: 16,
-    paddingHorizontal: 16,
+  webview: {
+    flex: 1,
+    backgroundColor: colors.background,
+  },
+  loadingContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.background,
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: colors.text,
+    fontWeight: "500",
   },
 });
