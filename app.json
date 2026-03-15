@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Blink Site App",
-    "slug": "blink-site-app",
+    "name": "chik-chak",
+    "slug": "chik-chak",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/natively-dark.png",
@@ -36,7 +36,7 @@
       "expo-router",
       "expo-web-browser"
     ],
-    "scheme": "blinksiteapp",
+    "scheme": "chikchak",
     "experiments": {
       "typedRoutes": true
     },
