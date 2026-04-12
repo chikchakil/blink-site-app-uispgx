@@ -42,7 +42,9 @@
       "typedRoutes": true
     },
     "extra": {
-      "router": {}
+      "router": {},
+      "supportUrl": "https://chik-chak.com/support",
+      "privacyPolicyUrl": "https://chik-chak.com/privacy-policy"
     }
   },
   "scheme": "Blink Site App"
