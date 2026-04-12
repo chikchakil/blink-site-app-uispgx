@@ -4,7 +4,7 @@
     "slug": "chik-chak",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/natively-dark.png",
+    "icon": "./assets/images/01685194-8938-4717-a6b4-33949729bef6.jpeg",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
@@ -13,6 +13,7 @@
       "backgroundColor": "#000000"
     },
     "ios": {
+      "icon": "./assets/images/01685194-8938-4717-a6b4-33949729bef6.jpeg",
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.Natively",
       "infoPlist": {
@@ -21,8 +22,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/natively-dark.png",
-        "backgroundColor": "#000000"
+        "foregroundImage": "./assets/images/01685194-8938-4717-a6b4-33949729bef6.jpeg",
+        "backgroundColor": "#FF2D78"
       },
       "edgeToEdgeEnabled": true,
       "package": "com.anonymous.Natively"

@@ -43,7 +43,14 @@ module.exports = {
     {
       files: ['metro.config.js'],
       rules: {
-        '@typescript-eslint/no-var-requires': 'off'
+        '@typescript-eslint/no-var-requires': 'off',
+        'no-control-regex': 'off'
+      }
+    },
+    {
+      files: ['components/Map.web.tsx'],
+      rules: {
+        'import/no-unresolved': 'off'
       }
     }
   ]
