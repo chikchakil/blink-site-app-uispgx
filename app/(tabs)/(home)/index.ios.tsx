@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Stack } from "expo-router";
 import { StyleSheet, View, ActivityIndicator, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { WebView } from "react-native-webview";
 import { colors } from "@/styles/commonStyles";
 import { HeaderRightButton, HeaderLeftButton } from "@/components/HeaderButtons";
@@ -10,10 +11,11 @@ export default function HomeScreen() {
   const [loading, setLoading] = useState(true);
 
   return (
-    <>
+    <SafeAreaView style={styles.safeArea} edges={["top"]}>
       <Stack.Screen
         options={{
           title: "Appointment Manager",
+          headerShown: false,
           headerRight: () => <HeaderRightButton />,
           headerLeft: () => <HeaderLeftButton />,
         }}
@@ -22,6 +24,8 @@ export default function HomeScreen() {
         <WebView
           source={{ uri: "https://saas-appointment-manager-beauty-businesses-i25icg96.sites.blink.new" }}
           style={styles.webview}
+          contentInsetAdjustmentBehavior="never"
+          automaticallyAdjustContentInsets={false}
           onLoadStart={() => {
             console.log("WebView loading started");
             setLoading(true);
@@ -46,11 +50,15 @@ export default function HomeScreen() {
           </View>
         )}
       </View>
-    </>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#FFD700",
+  },
   container: {
     flex: 1,
     backgroundColor: colors.background,
