@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "chik-chak",
+    "name": "Chik-Chak - Beauty Manager",
     "slug": "chik-chak",
     "version": "1.0.0",
+    "description": "The smart appointment manager for beauty professionals. Schedule clients, manage services, and grow your business.",
     "orientation": "portrait",
     "icon": "./assets/images/01685194-8938-4717-a6b4-33949729bef6.jpeg",
     "userInterfaceStyle": "automatic",
@@ -10,14 +11,20 @@
     "splash": {
       "image": "./assets/images/natively-dark.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#FFFFFF"
     },
     "ios": {
       "icon": "./assets/images/01685194-8938-4717-a6b4-33949729bef6.jpeg",
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.Natively",
+      "requireFullScreen": true,
+      "userInterfaceStyle": "light",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "Used to capture photos for your profile and appointments",
+        "NSPhotoLibraryUsageDescription": "Used to select photos for your profile",
+        "NSUserNotificationsUsageDescription": "Get reminders for your upcoming appointments",
+        "CFBundleLocalizations": ["en", "fr", "ar", "es"]
       }
     },
     "android": {

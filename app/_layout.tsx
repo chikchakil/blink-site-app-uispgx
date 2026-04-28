@@ -15,6 +15,7 @@ import {
 } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { WidgetProvider } from "@/contexts/WidgetContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -31,10 +32,27 @@ export default function RootLayout() {
   });
 
   useEffect(() => {
-    if (loaded) {
+    if (!loaded) return;
+
+    const initApp = async () => {
       console.log('[App] App loaded and splash screen hidden');
       SplashScreen.hideAsync();
-    }
+
+      try {
+        const onboardingComplete = await AsyncStorage.getItem("onboarding_complete");
+        console.log('[App] Onboarding complete flag:', onboardingComplete);
+        if (!onboardingComplete) {
+          console.log('[App] First launch — redirecting to onboarding');
+          router.replace("/onboarding");
+        } else {
+          console.log('[App] Returning user — proceeding to tabs');
+        }
+      } catch (e) {
+        console.log('[App] AsyncStorage read error:', e);
+      }
+    };
+
+    initApp();
   }, [loaded]);
 
   React.useEffect(() => {
@@ -86,6 +104,9 @@ export default function RootLayout() {
           <WidgetProvider>
             <GestureHandlerRootView>
             <Stack>
+              {/* Onboarding */}
+              <Stack.Screen name="onboarding" options={{ headerShown: false }} />
+
               {/* Main app with tabs */}
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
